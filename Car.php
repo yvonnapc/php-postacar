@@ -4,6 +4,11 @@
       public $make_model;
       public $price;
       public $miles;
+
+      function worthBuying($max_price)
+      {
+        return $this->price < ($max_price +100);
+      }
   }
 
   $porsche = new Car();
@@ -29,7 +34,8 @@
   $cars = array($porsche, $ford, $lexus, $mercedes);
 $cars_matching_search = array();
 foreach ($cars as $car){
-  if ($car->price < $_GET["price"]){
+  if ($car->worthBuying($_GET['price'])){
+
     array_push($cars_matching_search, $car);
   }
 }
