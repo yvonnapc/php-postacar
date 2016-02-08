@@ -59,9 +59,11 @@
       {
           return $this->image;
       }
-      function worthBuying($max_price)
-      {
-          return $this->price < ($max_price +100);
+      function worthBuying($max_price, $max_miles)
+      {   if (($this->price <= $max_price +100) && ($this->miles <= $max_miles))
+        {
+          return $this;
+        }
       }
 
   }
@@ -74,7 +76,7 @@
   $cars = array($porsche, $ford, $lexus, $mercedes);
   $cars_matching_search = array();
       foreach ($cars as $car){
-          if ($car->worthBuying($_GET['price'])){
+          if ($car->worthBuying($_GET['price'], $_GET['miles'])){
 
       array_push($cars_matching_search, $car);
   }
@@ -85,18 +87,25 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/styles.css" media="screen">
     <title>Contreras & Netzel Car Dealership</title>
   </head>
   <body>
       <h1>Contreras & Netzel Cars</h1>
       <ul>
           <?php
-              foreach ($cars_matching_search as $car) {
-                 $show_model = $car->getModel();
+          if (empty($cars_matching_search)){
+              echo "<p>No matches</p>";
+          }
+          else {
+              foreach ($cars_matching_search as $car)
+              {
+                $show_model = $car->getModel();
                  $show_price = $car->getPrice();
                  $show_miles = $car->getMiles();
                  $show_history = $car->getHistory();
                  $show_image = $car->getImage();
+
                   echo "<li> $show_model </li>";
                   echo "<li><img src='$show_image'></li>";
                   echo "<ul>";
@@ -105,6 +114,7 @@
                       echo "<li> Number of Accidents: $show_history </li>";
                   echo "</ul>";
               }
+          }
           ?>
       </ul>
 </body>
