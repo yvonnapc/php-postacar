@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Cars For Sale</title>
+</head>
+<body>
+  {% if car is not empty %}
+    <p>Here cars listed:</p>
+    <ul>
+      {% for new_car in car %}
+          <li>{{ new_car.getYear }}</li>
+          <li>{{ new_car.getPrice }}</li>
+          <li>{{ new_car.getModel }}</li>
+          <li>{{ new_car.getPhoto }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form action='/car' method='post'>
+    <label for='year'>Car Year</label>
+    <input id='year' name='year' type='number'>
+
+    <label for='price'>Car Price</label>
+    <input id='price' name='price' type='number'>
+
+    <label for='model'>Car Model</label>
+    <input id='model' name='model' type='text'>
+
+    <label for='photo'>Car Photo</label>
+    <input id='photo' name='photo' type='text'>
+
+    <button type='submit'>Add Car</button>
+  </form>
+  <form action='/delete_car' method='post'>
+      <button type='submit'>Clear</button>
+  </form>
+  </body>
+  </html>
+
+</body>
+</html>
