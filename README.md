@@ -1,6 +1,6 @@
 # Car Dealership
 
-#### An application that returns cars based on search attributes, February 8, 2016
+#### An application that returns cars based on search attributes | February 11, 2016
 
 #### By Yvonna Contreras & Nic Netzel
 
